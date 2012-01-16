@@ -7,10 +7,16 @@ var express = require('express')
   , routes = require('./routes')
   , fs = require('fs')
   , config = require('./external-app/test_config')
+  , util = require('util')
+  , Jasmine = require('./lib/jasmine');
 
 var app = module.exports = express.createServer();
 
-app.jasmineConfig = config;
+app.jasmine = new Jasmine(config);
+
+app.helpers({
+  inspect: util.inspect
+});
 
 // Configuration
 

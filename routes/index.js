@@ -1,22 +1,18 @@
 var matchFiles = require('match-files'),
-    path = require('path');
+    path = require('path'),
+    util = require('util');
 
 exports.index = function(req, res){
-  var config = res.app.jasmineConfig,
-      root = path.join(__dirname, '../external-app/'),
-      specPath = path.join(root, config.paths.specs, '/');
 
-  matchFiles.find(specPath, {
-    fileFilters: [function(path){
-      return config.patterns.spec.test(path);
-    }]
-  }, function(err, files){
+  var app = res.app;
+
+  app.jasmine.findSpecs(function(err, specs){
     render({
-      title: 'Your Specs',
-      files: files.map(function(file){
-        return file.replace(specPath, '')
-      }),
-      err: err
+      title: 'Bad Runner v0.0',
+      err: err,
+      files: specs.map(function(file){
+        return file.replace(app.jasmine.specPath, '');
+      })
     });
   });
 
@@ -25,3 +21,4 @@ exports.index = function(req, res){
   }
 
 };
+
