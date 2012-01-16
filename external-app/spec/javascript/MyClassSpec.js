@@ -15,4 +15,21 @@ describe("MyClass", function(){
       expect(subject.args[0]).toBe('foo');
     });
   });
+
+  it("should show main scope", function(){
+
+  });
+
+  describe("deeply", function(){
+
+    describe("nested", function(){
+
+      it("things!", function(){
+
+      });
+
+    });
+
+  });
+
 });

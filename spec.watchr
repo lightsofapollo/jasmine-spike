@@ -3,5 +3,5 @@ watch 'spec/(.*)\.js' do
 end
 
 watch 'lib/(.*)\.js' do
-  puts `jasmine-node --verbose spec`
+  puts `jasmine-node spec`
 end
