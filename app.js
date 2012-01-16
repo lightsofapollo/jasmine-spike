@@ -5,8 +5,12 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , fs = require('fs')
+  , config = require('./external-app/test_config')
 
 var app = module.exports = express.createServer();
+
+app.jasmineConfig = config;
 
 // Configuration
 
