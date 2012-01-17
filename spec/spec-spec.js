@@ -5,8 +5,6 @@ describe("spec", function(){
       spec = root + 'MyClassSpec.js',
       fs = require('fs');
 
-
-
   beforeEach(function(){
     subject = new klass({
       file: spec,
@@ -72,7 +70,7 @@ describe("spec", function(){
 
         expect(subject.analytics).toEqual({
           name: 'MyClass',
-          dependencies: ['MyClass.js']
+          dependencies: ['/jasmine/source/MyClass.js']
         });
 
         done();
