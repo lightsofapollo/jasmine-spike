@@ -8,7 +8,8 @@ describe("jasmine", function(){
       }, 
       util = klass.prototype.utils,
       path = require('path'),
-      root = path.join(__dirname, '../external-app');
+      root = path.join(__dirname, '../external-app'),
+      Spec = require('../lib/spec');
 
   function hasOption(name, value) {
     it("should have set option '" + name + "' to: " + value, function(){
@@ -90,6 +91,25 @@ describe("jasmine", function(){
     });
   });
 
+  describe("._createSpec", function(){
+
+    var result,
+        file = root + '/spec/javascript/MyClassSpec.js';
+
+    beforeEach(function(){
+      result = subject._createSpec(file);
+    });
+
+    it("should be an instance of Spec", function(){
+      expect(result instanceof Spec).toBe(true);
+    });
+
+    it("should have set file in spec", function(){
+      expect(result.file).toEqual(file);
+    });
+
+  });
+
   describe(".findSpecs", function(){
 
     var list = [
@@ -107,7 +127,15 @@ describe("jasmine", function(){
 
     it("should find all specs", function(done){
       subject.findSpecs(function(err, specs){
-        expect(specs.sort()).toEqual(expected);
+        var specFiles = specs.map(function(item){
+          return item.file;
+        }), i, len;
+
+        for(i = 0, len = specs.length; i < len; i++){
+          expect(specs[i] instanceof Spec).toBe(true)
+        }
+
+        expect(specFiles.sort()).toEqual(expected);
         done();
       });
     });
