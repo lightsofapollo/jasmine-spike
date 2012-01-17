@@ -1,6 +1,7 @@
 var matchFiles = require('match-files'),
     path = require('path'),
-    util = require('util');
+    util = require('util'),
+    Spec = require('../lib/spec');
 
 exports.index = function(req, res){
 
@@ -10,9 +11,7 @@ exports.index = function(req, res){
     render({
       title: 'Bad Runner v0.0',
       err: err,
-      files: specs.map(function(file){
-        return file.replace(app.jasmine.specPath, '');
-      })
+      specs: specs
     });
   });
 
@@ -22,3 +21,18 @@ exports.index = function(req, res){
 
 };
 
+exports.runSingle = function(req, res){
+  var app = res.app,
+      spec = new Spec({
+        rootPath: app.jasmine.specPath,
+        file: path.join(app.jasmine.specPath, req.params[0])
+      });
+
+  spec.analyze(function(){
+    res.render('single', {
+      title: "Executing " + spec.relativePath,
+      spec: spec
+    });
+  });
+
+};

@@ -1,5 +1,7 @@
 h1 Magic Test Runner
 
-pre
-  = files.join(', ')
-  = inspect(files)
+ul
+  each spec in specs
+    li
+      a(href=specPath(spec))
+        = spec.relativePath
