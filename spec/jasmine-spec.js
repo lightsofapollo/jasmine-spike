@@ -2,7 +2,7 @@ describe("jasmine", function(){
 
   var subject, klass = require('../lib/jasmine'), defaultOptions = {
         sourcePath: 'public/javascript',
-        specPath: 'spec/javascript',
+        specPath: 'spec/javascript/',
         servePath: 'public',
         specPattern: /spec\.js$/i
       }, 
@@ -51,7 +51,7 @@ describe("jasmine", function(){
 
       var newOpts = {
         servePath: 'foo/bar',
-        specPath: 'bar/foo'
+        specPath: 'bar/foo/'
       };
 
       beforeEach(function(){
@@ -68,7 +68,7 @@ describe("jasmine", function(){
 
     it("should be an absolute path to the specs", function(){
       expect(path.join(
-        root, 'spec', 'javascript'
+        root, 'spec', 'javascript', '/'
       )).toBe(subject.specPath);
     });
   });
