@@ -1,7 +1,9 @@
-h1 Magic Test Runner
+extends layout
 
-ul
-  each spec in specs
-    li
-      a(href=specPath(spec))
-        = spec.relativePath
+block content
+  h1 Magic Test Runner
+  ul
+    each spec in specs
+      li
+        a(href=specPath(spec))
+          = spec.relativePath

@@ -1,4 +1,36 @@
-a(href="/") Back
+extends layout
 
-h1 #{spec.relativePath} / #{spec.analytics.name}
+block append head
+  script(
+    src="/javascripts/jasmine/lib/jasmine-core/jasmine.js" 
+    type="text/javascript"
+  )
 
+  script(
+    src="/javascripts/jasmine/lib/jasmine-core/jasmine-html.js" 
+    type="text/javascript"
+  )
+
+  link(rel="stylesheet", href="/javascripts/jasmine/lib/jasmine-core/jasmine.css")
+
+block content
+  a(href="/") Back
+  h1 #{spec.relativePath} / #{spec.analytics.name}
+
+block append after-body
+  script(type="text/javascript")
+    (function(exports){
+      function require(src){
+        document.write(
+          unescape(
+            "%3Cscript src='" + src + "' type='text/javascript'%3E%3C/script%3E"
+          )
+        );
+      }
+      exports.require = require;
+    }(window));
+
+  - specPath = "/jasmine/spec/" + spec.relativePath;
+  script( src=specPath )
+
+  != partial('_executeJasmine', {});

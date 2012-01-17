@@ -1,5 +1,5 @@
 //Evergreen compat
-require('MyClass.js');
+require('/jasmine/source/MyClass.js');
 
 describe("MyClass", function(){
 
